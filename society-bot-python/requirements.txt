@@ -1,0 +1,17 @@
+# Society Payment Tracker Bot - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Telegram Bot API
+python-telegram-bot==21.7
+
+# MySQL Database
+mysql-connector-python==9.1.0
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# Excel Export
+openpyxl==3.1.2
+
+# Async Support (included with python-telegram-bot)
+# asyncio is built-in for Python 3.7+
