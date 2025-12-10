@@ -4,7 +4,7 @@
 # Telegram Bot API
 python-telegram-bot==21.7
 
-# MySQL Database
+# MySQL Database (XAMPP / Cloud)
 mysql-connector-python==9.1.0
 
 # Environment Variables
@@ -12,6 +12,10 @@ python-dotenv==1.0.0
 
 # Excel Export
 openpyxl==3.1.2
+
+# Web Server (for Render free tier)
+flask==3.0.0
+gunicorn==21.2.0
 
 # Async Support (included with python-telegram-bot)
 # asyncio is built-in for Python 3.7+

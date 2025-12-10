@@ -1,0 +1,32 @@
+# Render Blueprint Configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Free Web Service for Telegram Bot
+  - type: web
+    name: society-payment-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: BOT_TOKEN
+        sync: false  # Set manually in Render dashboard
+      - key: ADMIN_IDS
+        sync: false  # Set manually in Render dashboard
+      - key: DB_HOST
+        sync: false  # Your MySQL host (e.g., from PlanetScale, Railway, or other)
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        sync: false  # Set manually in Render dashboard
+      - key: DB_PASSWORD
+        sync: false  # Set manually in Render dashboard
+      - key: DB_NAME
+        sync: false  # Set manually in Render dashboard
+      - key: DB_SSL
+        value: "true"  # Enable SSL for cloud database
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PYTHON_VERSION
+        value: "3.11.0"

@@ -159,7 +159,7 @@ async def main() -> None:
         print("❌ Failed to start server:", str(e))
         print()
         print("Troubleshooting tips:")
-        print("1. Check if MySQL server is running")
+        print("1. Check if MySQL server is running (XAMPP)")
         print("2. Verify database credentials in .env file")
         print("3. Ensure BOT_TOKEN is valid")
         print("4. Check ADMIN_IDS are correct")

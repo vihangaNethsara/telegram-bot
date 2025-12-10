@@ -8,12 +8,14 @@ with connection pooling for efficient database operations.
 
 Features:
 - Connection pooling for better performance
+- SSL support for cloud databases (Render, PlanetScale, etc.)
 - Async-compatible synchronous operations
 - Automatic connection management
 - Environment-based configuration
 """
 
 import os
+import ssl
 import logging
 from contextlib import contextmanager
 from typing import Optional, List, Dict, Any
@@ -37,7 +39,7 @@ class DatabaseConfig:
     @classmethod
     def get_config(cls) -> Dict[str, Any]:
         """Get database configuration from environment variables."""
-        return {
+        config = {
             'host': os.getenv('DB_HOST', 'localhost'),
             'port': int(os.getenv('DB_PORT', '3306')),
             'user': os.getenv('DB_USER', 'root'),
@@ -48,6 +50,15 @@ class DatabaseConfig:
             'autocommit': True,
             'get_warnings': True,
         }
+        
+        # Enable SSL for cloud database connections
+        if os.getenv('DB_SSL', 'false').lower() == 'true':
+            config['ssl_disabled'] = False
+            config['ssl_verify_cert'] = False
+            config['ssl_verify_identity'] = False
+            logger.info("   SSL: Enabled for cloud database")
+        
+        return config
     
     @classmethod
     def initialize_pool(cls, pool_size: int = 5) -> None:
@@ -181,8 +192,6 @@ class DatabaseConfig:
     @classmethod
     def close_pool(cls) -> None:
         """Close all connections in the pool."""
-        # Note: mysql-connector-python doesn't have explicit pool close
-        # Connections are closed when they go out of scope
         cls._pool = None
         logger.info("✅ Database connection pool closed")
 
